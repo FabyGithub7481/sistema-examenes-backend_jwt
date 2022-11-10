@@ -1,6 +1,7 @@
 package com.sistema.examanes.sistema.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sistema.examanes.sistema.entidades.AuthCredentiales;
 import java.io.IOException;
 import java.util.Collections;
 import javax.servlet.FilterChain;

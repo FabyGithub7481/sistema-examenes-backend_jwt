@@ -1,4 +1,4 @@
-package com.sistema.examanes.sistema.security;
+package com.sistema.examanes.sistema.entidades;
 
 import static lombok.AccessLevel.PRIVATE;
 

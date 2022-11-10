@@ -32,8 +32,10 @@ public class WebSecurityConfig {
 
     return http
         .csrf().disable()
+        .cors()
+        .disable()
         .authorizeRequests()
-        .antMatchers("/login","/users/").permitAll()
+        .antMatchers("/generate-token","/login","/users/").permitAll()
         .antMatchers(HttpMethod.OPTIONS).permitAll()
         .anyRequest()
         .authenticated()

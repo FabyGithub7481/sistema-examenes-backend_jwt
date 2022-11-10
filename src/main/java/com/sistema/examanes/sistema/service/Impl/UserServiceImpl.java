@@ -20,7 +20,7 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   public UserT saveUser(UserT userT, Set<UserRole> userRoles) throws Exception {
-    UserT localUserT = iUserRepository.findByUserName(userT.getUserName());
+    UserT localUserT = iUserRepository.findByUserName(userT.getUsername());
     if (localUserT != null) {
       System.out.println("El usuario ya existe");
       throw new Exception("El usuario ya esta presente");

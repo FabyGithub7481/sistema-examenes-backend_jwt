@@ -9,7 +9,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TokenUtils {
 
 //  private static final String ACCESS_TOKEN_SECRET = "secretetoke12345";
