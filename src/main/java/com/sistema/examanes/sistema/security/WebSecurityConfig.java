@@ -1,8 +1,11 @@
 package com.sistema.examanes.sistema.security;
 
+import java.util.Collections;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @AllArgsConstructor
@@ -22,7 +28,20 @@ public class WebSecurityConfig {
   private final UserDetailsService userDetailsService;
   private final JWTAuthorizationFilter jwtAuthorizationFilter;
 
-
+ /* @Bean
+  public FilterRegistrationBean simpleCorsFilter() {
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    CorsConfiguration config = new CorsConfiguration();
+    config.setAllowCredentials(true);
+    // *** URL below needs to match the Vue client URL and port ***
+    config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+    config.setAllowedMethods(Collections.singletonList("*"));
+    config.setAllowedHeaders(Collections.singletonList("*"));
+    source.registerCorsConfiguration("/**", config);
+    FilterRegistrationBean bean = new FilterRegistrationBean<>(new CorsFilter(source));
+    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    return bean;
+  }*/
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager)
       throws Exception {
@@ -30,18 +49,32 @@ public class WebSecurityConfig {
     jwtAuthenticationFilter.setAuthenticationManager(authManager);
     jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 
+    /*return http
+        .csrf()
+        .disable()
+        .cors()
+        .disable()
+        .authorizeRequests()
+        .antMatchers("/generate-token", "/users/").permitAll()
+        .antMatchers(HttpMethod.OPTIONS).permitAll()
+        .anyRequest().authenticated()
+        .and()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .addFilter(jwtAuthenticationFilter)
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+        .build();
+  }*/
+
     return http
         .csrf().disable()
         .cors()
         .disable()
         .authorizeRequests()
-        .antMatchers("/generate-token","/login","/users/").permitAll()
+        .antMatchers("/generate-token", "/login", "/users/").permitAll()
         .antMatchers(HttpMethod.OPTIONS).permitAll()
         .anyRequest()
         .authenticated()
-        //para implementar autorizacion basica
-//        .and()
-//        .httpBasic()
         .and()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -50,6 +83,8 @@ public class WebSecurityConfig {
         .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
+
+
 
   //  @Bean
 //  UserDetailsService userDetailsService() {
