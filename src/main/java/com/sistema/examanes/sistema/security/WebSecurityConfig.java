@@ -28,7 +28,8 @@ public class WebSecurityConfig {
   private final UserDetailsService userDetailsService;
   private final JWTAuthorizationFilter jwtAuthorizationFilter;
 
- /* @Bean
+ //en caso que les de problemas de CORS
+  /* @Bean
   public FilterRegistrationBean simpleCorsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
@@ -49,22 +50,6 @@ public class WebSecurityConfig {
     jwtAuthenticationFilter.setAuthenticationManager(authManager);
     jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 
-    /*return http
-        .csrf()
-        .disable()
-        .cors()
-        .disable()
-        .authorizeRequests()
-        .antMatchers("/generate-token", "/users/").permitAll()
-        .antMatchers(HttpMethod.OPTIONS).permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .addFilter(jwtAuthenticationFilter)
-        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-        .build();
-  }*/
 
     return http
         .csrf().disable()
@@ -84,8 +69,7 @@ public class WebSecurityConfig {
         .build();
   }
 
-
-
+//para hacer una prueba antes de implemntar JWT con autentificacion basica con credenciales quemadas
   //  @Bean
 //  UserDetailsService userDetailsService() {
 //    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();

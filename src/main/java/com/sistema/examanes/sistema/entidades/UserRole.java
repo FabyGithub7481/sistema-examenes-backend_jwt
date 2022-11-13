@@ -35,29 +35,5 @@ public class UserRole {
   @JoinColumn(name = "role_rol_id")
   Role role;
 
- /* @ManyToOne
-  @JoinColumn(name = "role_rol_id")
-  private Role role;
-
-  @ManyToOne
-  @JoinColumn(name = "user_t_id")
-  private UserT userT;
-
-  public UserT getUserT() {
-    return userT;
-  }
-
-  public void setUserT(UserT userT) {
-    this.userT = userT;
-  }
-
-  public Role getRole() {
-    return role;
-  }
-
-  public void setRole(Role role) {
-    this.role = role;
-  }
-*/
 
 }

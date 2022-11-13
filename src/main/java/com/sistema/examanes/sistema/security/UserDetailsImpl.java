@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
-  private final UserT usuario;
+  private final UserT userT;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -20,12 +20,12 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public String getPassword() {
-    return usuario.getPassword();
+    return userT.getPassword();
   }
 
   @Override
   public String getUsername() {
-    return usuario.getEmail();
+    return userT.getEmail();
   }
 
   @Override
@@ -49,6 +49,6 @@ public class UserDetailsImpl implements UserDetails {
   }
 
   public String getNombre() {
-    return usuario.getName();
+    return userT.getName();
   }
 }

@@ -2,6 +2,7 @@ package com.sistema.examanes.sistema.service.Impl;
 
 import com.sistema.examanes.sistema.entidades.UserRole;
 import com.sistema.examanes.sistema.entidades.UserT;
+import com.sistema.examanes.sistema.excepciones.UsuarioFoundException;
 import com.sistema.examanes.sistema.repository.IRolRepository;
 import com.sistema.examanes.sistema.repository.IUserRepository;
 import com.sistema.examanes.sistema.service.IUserService;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements IUserService {
     UserT localUserT = iUserRepository.findByUserName(userT.getUsername());
     if (localUserT != null) {
       System.out.println("El usuario ya existe");
-      throw new Exception("El usuario ya esta presente");
+      throw new UsuarioFoundException("El usuario ya esta presente");
     } else {
       for (UserRole userRole : userRoles) {
         iRolRepository.save(userRole.getRole());

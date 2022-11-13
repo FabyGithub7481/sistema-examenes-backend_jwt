@@ -3,6 +3,7 @@ package com.sistema.examanes.sistema;
 import com.sistema.examanes.sistema.entidades.Role;
 import com.sistema.examanes.sistema.entidades.UserRole;
 import com.sistema.examanes.sistema.entidades.UserT;
+import com.sistema.examanes.sistema.excepciones.UsuarioFoundException;
 import com.sistema.examanes.sistema.service.IUserService;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class SistemaExamenesBackendApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    /*try {
+   /* try {
       UserT userT = new UserT();
       userT.setName("Leornado");
       userT.setLastName("Dicaprio");
@@ -44,11 +45,13 @@ public class SistemaExamenesBackendApplication implements CommandLineRunner {
       userRole.setUserT(userT);
       userRoles.add(userRole);
       UserT userSave = iUserService.saveUser(userT, userRoles);
-      System.out.println(userSave.getUserName());
+      System.out.println(userSave.getUsername());
     }
-    catch (Exception e)
+    catch (UsuarioFoundException e)
     {
       e.printStackTrace();
-    }*/
+
+  }
+}*/
   }
 }
